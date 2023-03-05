@@ -1,17 +1,29 @@
-﻿using System.Net.Sockets;
+﻿using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace Client
 {
     class Program
     {
-        const int PORT_NO = 5000;
-        const string SERVER_IP = "127.0.0.2";
+        static int PORT_NO = 501;
+        static string SERVER_IP = "14.225.205.166";
         static void Main(string[] args)
         {
-            //---create a TCPClient object at the IP and port no.---
-            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
-            NetworkStream nwStream = client.GetStream();
+            Console.Write("Hello, Please enter Ip: ");
+            SERVER_IP = Console.ReadLine();
+
+            Console.Write("Please enter port number: ");
+            PORT_NO = int.Parse(Console.ReadLine());
+
+            //Uses a remote endpoint to establish a socket connection.
+            TcpClient tcpClient = new TcpClient();
+            IPAddress ipAddress = Dns.GetHostEntry(SERVER_IP).AddressList[0];
+            IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, PORT_NO);
+
+            tcpClient.Connect(ipEndPoint);
+
+            NetworkStream nwStream = tcpClient.GetStream();
 
             while (true)
             {
@@ -25,14 +37,14 @@ namespace Client
                 nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 
                 //---read back the text---
-                byte[] bytesToRead = new byte[client.ReceiveBufferSize];
-                int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
+                byte[] bytesToRead = new byte[tcpClient.ReceiveBufferSize];
+                int bytesRead = nwStream.Read(bytesToRead, 0, tcpClient.ReceiveBufferSize);
                 Console.WriteLine("Received : " + Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
 
             }
 
             Console.ReadLine();
-            client.Close();
+            tcpClient.Close();
         }
     }
 }

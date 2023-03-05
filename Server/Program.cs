@@ -6,12 +6,15 @@ namespace Server
 {
     class Program
     {
-        const int PORT_NO = 5000;
-        const string SERVER_IP = "127.0.0.2";
+        static int PORT_NO = 5002;
+        static string SERVER_IP = "14.225.205.166";
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.Write("Hello, Please enter Ip: ");
+            SERVER_IP = Console.ReadLine();
+            Console.Write("Hello, Please enter port: ");
+            PORT_NO = int.Parse(Console.ReadLine());
             //---listen at the specified IP and port no.---
             IPAddress localAdd = IPAddress.Parse(SERVER_IP);
             TcpListener listener = new TcpListener(localAdd, PORT_NO);
@@ -19,7 +22,7 @@ namespace Server
             listener.Start();
             //---incoming client connected---
             TcpClient client = listener.AcceptTcpClient();
-
+            Console.WriteLine("Connted");
             while (true)
             {
 
@@ -31,13 +34,13 @@ namespace Server
                 int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
 
                 //---convert the data received into a string---
-                string dataReceived = ASCIIEncoding.ASCII.GetString(buffer, 0, bytesRead);
+                string dataReceived = ASCIIEncoding.UTF8.GetString(buffer, 0, bytesRead);
                 Console.WriteLine("Received : " + dataReceived);
 
                 //---write back the text to the client---
                 Console.WriteLine("Sending back : " + dataReceived);
                 nwStream.Write(buffer, 0, bytesRead);
-                
+
             }
 
             client.Close();
