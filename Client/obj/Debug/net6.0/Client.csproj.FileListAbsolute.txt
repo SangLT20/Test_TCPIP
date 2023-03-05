@@ -1,0 +1,15 @@
+J:\Project\IOT\Test_TCPIP\Client\bin\Debug\net6.0\Client.exe
+J:\Project\IOT\Test_TCPIP\Client\bin\Debug\net6.0\Client.deps.json
+J:\Project\IOT\Test_TCPIP\Client\bin\Debug\net6.0\Client.runtimeconfig.json
+J:\Project\IOT\Test_TCPIP\Client\bin\Debug\net6.0\Client.dll
+J:\Project\IOT\Test_TCPIP\Client\bin\Debug\net6.0\Client.pdb
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.csproj.AssemblyReference.cache
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.AssemblyInfoInputs.cache
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.AssemblyInfo.cs
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.csproj.CoreCompileInputs.cache
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.dll
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\refint\Client.dll
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.pdb
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\Client.genruntimeconfig.cache
+J:\Project\IOT\Test_TCPIP\Client\obj\Debug\net6.0\ref\Client.dll

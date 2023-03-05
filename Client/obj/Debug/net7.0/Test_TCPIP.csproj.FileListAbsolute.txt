@@ -1,0 +1,15 @@
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.csproj.AssemblyReference.cache
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.GeneratedMSBuildEditorConfig.editorconfig
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.AssemblyInfoInputs.cache
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.AssemblyInfo.cs
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.csproj.CoreCompileInputs.cache
+J:\Project\IOT\Test_TCPIP\bin\Debug\net7.0\Test_TCPIP.exe
+J:\Project\IOT\Test_TCPIP\bin\Debug\net7.0\Test_TCPIP.deps.json
+J:\Project\IOT\Test_TCPIP\bin\Debug\net7.0\Test_TCPIP.runtimeconfig.json
+J:\Project\IOT\Test_TCPIP\bin\Debug\net7.0\Test_TCPIP.dll
+J:\Project\IOT\Test_TCPIP\bin\Debug\net7.0\Test_TCPIP.pdb
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.dll
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\refint\Test_TCPIP.dll
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.pdb
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\Test_TCPIP.genruntimeconfig.cache
+J:\Project\IOT\Test_TCPIP\obj\Debug\net7.0\ref\Test_TCPIP.dll
