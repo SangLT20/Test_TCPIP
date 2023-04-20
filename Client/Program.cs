@@ -1,50 +1,72 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Client
+class MyTcpListener
 {
-    class Program
+    public static void Main()
     {
-        static int PORT_NO = 501;
-        static string SERVER_IP = "14.225.205.166";
-        static void Main(string[] args)
+        while (Console.ReadKey(true).Key != ConsoleKey.E)
         {
-            Console.Write("Hello, Please enter Ip: ");
-            SERVER_IP = Console.ReadLine();
-
-            Console.Write("Please enter port number: ");
-            PORT_NO = int.Parse(Console.ReadLine());
-
-            //Uses a remote endpoint to establish a socket connection.
-            TcpClient tcpClient = new TcpClient();
-            IPAddress ipAddress = Dns.GetHostEntry(SERVER_IP).AddressList[0];
-            IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, PORT_NO);
-
-            tcpClient.Connect(ipEndPoint);
-
-            NetworkStream nwStream = tcpClient.GetStream();
-
-            while (true)
-            {
-                //---data to send to the server---
-                string textToSend = DateTime.Now.ToString();
-                textToSend = $"{Console.ReadLine()} : {textToSend} ";
-                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
-
-                //---send the text---
-                Console.WriteLine("Sending : " + textToSend);
-                nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-
-                //---read back the text---
-                byte[] bytesToRead = new byte[tcpClient.ReceiveBufferSize];
-                int bytesRead = nwStream.Read(bytesToRead, 0, tcpClient.ReceiveBufferSize);
-                Console.WriteLine("Received : " + Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
-
-            }
-
-            Console.ReadLine();
-            tcpClient.Close();
+            Connect("192.168.1.90", "sang");
         }
+        
+    }
+
+    static void Connect(String server, String message)
+    {
+        try
+        {
+            // Create a TcpClient.
+            // Note, for this client to work you need to have a TcpServer
+            // connected to the same address as specified by the server, port
+            // combination.
+            Int32 port = 3000;
+
+            // Prefer a using declaration to ensure the instance is Disposed later.
+            using TcpClient client = new TcpClient(server, port);
+
+            // Translate the passed message into ASCII and store it as a Byte array.
+            Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+
+            // Get a client stream for reading and writing.
+            NetworkStream stream = client.GetStream();
+
+            // Send the message to the connected TcpServer.
+            stream.Write(data, 0, data.Length);
+
+            Console.WriteLine("Sent: {0}", message);
+
+            // Receive the server response.
+
+            // Buffer to store the response bytes.
+            data = new Byte[256];
+
+            // String to store the response ASCII representation.
+            String responseData = String.Empty;
+
+            // Read the first batch of the TcpServer response bytes.
+            Int32 bytes = stream.Read(data, 0, data.Length);
+            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+            Console.WriteLine("Received: {0}", responseData);
+
+            // Explicit close is not necessary since TcpClient.Dispose() will be
+            // called automatically.
+            // stream.Close();
+            // client.Close();
+        }
+        catch (ArgumentNullException e)
+        {
+            Console.WriteLine("ArgumentNullException: {0}", e);
+        }
+        catch (SocketException e)
+        {
+            Console.WriteLine("SocketException: {0}", e);
+        }
+
+        Console.WriteLine("\n Press Enter to continue...");
+        Console.Read();
     }
 }

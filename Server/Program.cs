@@ -1,51 +1,77 @@
-﻿
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-namespace Server
-{
-    class Program
-    {
-        static int PORT_NO = 5002;
-        static string SERVER_IP = "14.225.205.166";
 
-        static void Main(string[] args)
+class MyTcpListener
+{
+    public static void Main()
+    {
+        TcpListener server = null;
+        try
         {
-            Console.Write("Hello, Please enter Ip: ");
-            SERVER_IP = Console.ReadLine();
-            Console.Write("Hello, Please enter port: ");
-            PORT_NO = int.Parse(Console.ReadLine());
-            //---listen at the specified IP and port no.---
-            IPAddress localAdd = IPAddress.Parse(SERVER_IP);
-            TcpListener listener = new TcpListener(localAdd, PORT_NO);
-            Console.WriteLine("Listening...");
-            listener.Start();
-            //---incoming client connected---
-            TcpClient client = listener.AcceptTcpClient();
-            Console.WriteLine("Connted");
+            // Set the TcpListener on port 13000.
+            Int32 port = 3000;
+            IPAddress localAddr = IPAddress.Parse("192.168.1.90");
+
+            // TcpListener server = new TcpListener(port);
+            server = new TcpListener(localAddr, port);
+
+            // Start listening for client requests.
+            server.Start();
+
+            // Buffer for reading data
+            Byte[] bytes = new Byte[256];
+            String data = null;
+
+            // Enter the listening loop.
             while (true)
             {
+                Console.Write("Waiting for a connection... ");
 
-                //---get the incoming data through a network stream---
-                NetworkStream nwStream = client.GetStream();
-                byte[] buffer = new byte[client.ReceiveBufferSize];
+                // Perform a blocking call to accept requests.
+                // You could also use server.AcceptSocket() here.
+                using TcpClient client = server.AcceptTcpClient();
+                Console.WriteLine("Connected!");
 
-                //---read incoming stream---
-                int bytesRead = nwStream.Read(buffer, 0, client.ReceiveBufferSize);
+                data = null;
 
-                //---convert the data received into a string---
-                string dataReceived = ASCIIEncoding.UTF8.GetString(buffer, 0, bytesRead);
-                Console.WriteLine("Received : " + dataReceived);
+                // Get a stream object for reading and writing
+                NetworkStream stream = client.GetStream();
 
-                //---write back the text to the client---
-                Console.WriteLine("Sending back : " + dataReceived);
-                nwStream.Write(buffer, 0, bytesRead);
+                int i;
 
+                // Loop to receive all the data sent by the client.
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    // Translate data bytes to a ASCII string.
+                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                    Console.WriteLine("Received: {0}", data);
+
+                    // Process the data sent by the client.
+                    data = data.ToUpper();
+
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: {0}", data);
+                }
+
+                HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create("http://14.225.205.166:5000/api/weatherforecast/GetWeather");
             }
-
-            client.Close();
-            listener.Stop();
-            Console.ReadLine();
         }
+        catch (SocketException e)
+        {
+            Console.WriteLine("SocketException: {0}", e);
+        }
+        finally
+        {
+            server.Stop();
+        }
+
+        Console.WriteLine("\nHit enter to continue...");
+        Console.Read();
     }
 }
