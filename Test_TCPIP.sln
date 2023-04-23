@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7FAA66
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{1F7850BC-65B3-4DD5-977B-66715E2306A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{949AA823-E1F2-433D-94A2-4653FB900DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitoringSystem", "MonitoringSystem\MonitoringSystem.csproj", "{C592B8EB-E0FB-4E84-B26F-B119349DB05D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{1F7850BC-65B3-4DD5-977B-66715E2306A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F7850BC-65B3-4DD5-977B-66715E2306A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F7850BC-65B3-4DD5-977B-66715E2306A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C592B8EB-E0FB-4E84-B26F-B119349DB05D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C592B8EB-E0FB-4E84-B26F-B119349DB05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C592B8EB-E0FB-4E84-B26F-B119349DB05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C592B8EB-E0FB-4E84-B26F-B119349DB05D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{93153FAF-692E-4E82-98F1-29A16E2199C8} = {1F70EF1F-95F9-43F6-91D4-37E981861F9B}
 		{1F7850BC-65B3-4DD5-977B-66715E2306A8} = {7FAA66FE-FE4F-468F-AADE-EC0ABF1E74D1}
+		{C592B8EB-E0FB-4E84-B26F-B119349DB05D} = {949AA823-E1F2-433D-94A2-4653FB900DFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B384E262-9768-463D-9BEE-97D7C9CBC192}
