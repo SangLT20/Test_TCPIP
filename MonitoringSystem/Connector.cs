@@ -1,12 +1,14 @@
 using System.Net.Sockets;
 using System.Text;
+using System.Xml.Linq;
 
 namespace MonitoringSystem
 {
     public static class Connector
     {
-        public static void ConnectTCPIP(String server, int port, String message)
+        public static string ConnectTCPIP(String server, int port, String message)
         {
+            var result = string.Empty;
             try
             {
                 // Create a TcpClient.
@@ -44,11 +46,12 @@ namespace MonitoringSystem
 
                 responseData = Utility.ByteArrayToString(data);
                 Console.WriteLine("Received: {0}", responseData);
-                int valueA1 = data == null ? 
-                    0 
-                    : int.Parse(responseData.Substring(18, 4), System.Globalization.NumberStyles.HexNumber);
-                Console.WriteLine("ValueA1: {0}", valueA1);
-
+                //int valueA1 = data == null ? 
+                //    0 
+                //    : int.Parse(responseData.Substring(18, 4), System.Globalization.NumberStyles.HexNumber);
+                //value1 = valueA1;
+                //Console.WriteLine("ValueA1: {0}", valueA1);
+                result = responseData;
                 // Explicit close is not necessary since TcpClient.Dispose() will be
                 // called automatically.
                 // stream.Close();
@@ -62,22 +65,7 @@ namespace MonitoringSystem
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-        }
-
-        public static async Task ConnctHTTP(string server, int port, string message)
-        {
-            try
-            {
-                Console.WriteLine("** SERVICE STARTED **");
-
-                var httpClient = new HttpClient();
-
-                var todosJson = await httpClient.GetStringAsync($"https://jsonplaceholder.typicode.com/todos/{1}");
-            }
-            finally
-            {
-                Console.WriteLine("** SERVICE STOPPED **");
-            }
+            return result;
         }
     }
 }
