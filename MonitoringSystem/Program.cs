@@ -3,6 +3,10 @@ using Quartz;
 
 
 IHost host = Host.CreateDefaultBuilder(args)
+    .UseWindowsService(options =>
+    {
+        options.ServiceName = "MonitoringSystem 3";
+    })
     .ConfigureServices(services =>
     {
         services.AddHostedService<Worker>();

@@ -48,7 +48,7 @@ namespace MonitoringSystem
                         httpClient.DefaultRequestHeaders.Add("SecurityKey", _securityKey);
                         var response = await httpClient.PostAsync($"{_domain}{_functionUrl}", formContent);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         _logger.LogError(ex.ToString());
                     }
